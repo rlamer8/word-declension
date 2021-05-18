@@ -21,8 +21,6 @@ class Rule
     /* @var array */
     private $exceptionToTheRule;
 
-    /* @var bool */
-    private $isNeedToDecline;
     /* @var string */
     private $wordEndingImPad;
     /* @var string */
@@ -261,22 +259,6 @@ class Rule
     public function setRegExpEnding(string $regExpEnding): void
     {
         $this->regExpEnding = $regExpEnding;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isNeedToDecline(): bool
-    {
-        return $this->isNeedToDecline;
-    }
-
-    /**
-     * @param bool $isNeedToDecline
-     */
-    public function setIsNeedToDecline(bool $isNeedToDecline): void
-    {
-        $this->isNeedToDecline = $isNeedToDecline;
     }
 
 }

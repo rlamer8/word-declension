@@ -7,12 +7,19 @@ use Src\Entity\Rule;
 
 class CsvProvider implements RulesProvided
 {
-    private const RULES_FILE_PATH = __DIR__ . '/../../declension_rules/rules.csv';
-
     private const CONSONANTS_SYMBOL = 'С';
     private const VOWEL_SYMBOL = 'Г';
 
     private const BASE_REGEXP = '/([А-я]+(%s))(%s)$/u';
+    /**
+     * @var FileLoader
+     */
+    private $fileLoader;
+
+    public function __construct(FileLoader $fileLoader)
+    {
+        $this->fileLoader = $fileLoader;
+    }
 
     /**
      * @inheritDoc
@@ -62,7 +69,7 @@ class CsvProvider implements RulesProvided
      */
     private function getRulesRowsFromFile(): array
     {
-        $handle = fopen(self::RULES_FILE_PATH, 'rb');
+        $handle = $this->fileLoader->getFileHandle();
         $header = fgetcsv($handle, 1000, ';');
         $rules = [];
         while ($row = fgetcsv($handle, 1000, ';')) {

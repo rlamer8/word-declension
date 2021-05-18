@@ -6,7 +6,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Src\\": "src/"
+      "Src\\": "src/",
+      "Tests\\": "tests/"
     }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.0"
   }
 }
