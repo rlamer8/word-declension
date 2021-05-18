@@ -1,0 +1,12 @@
+{
+  "name": "rlamer8/word-declension",
+  "description": "Word declension",
+  "require": {
+    "php": "^7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Src\\": "src/"
+    }
+  }
+}
