@@ -1,10 +1,11 @@
 <?php
 
+namespace Tests;
+
 use PHPUnit\Framework\MockObject\MockObject;
 use Src\RuleProvider\CsvProvider;
 use PHPUnit\Framework\TestCase;
 use Src\RuleProvider\FileLoader;
-use Tests\BuildRuleTrait;
 
 class CsvProviderTest extends TestCase
 {
@@ -39,7 +40,7 @@ class CsvProviderTest extends TestCase
     {
         $handle = fopen(__DIR__ . '/RulesFiles/rules_test_exception.csv', 'rb');
         $this->fileLoaderMock->method('getFileHandle')->willReturn($handle);
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Error parse rules file');
         $this->csvProvider->getRules();
     }

@@ -1,10 +1,11 @@
 <?php
 
+namespace Tests;
+
 use Src\Declension;
 use Src\Output\ConsoleShow;
 use PHPUnit\Framework\TestCase;
 use Src\RuleProvider\RulesProvided;
-use Tests\BuildRuleTrait;
 
 class DeclensionTest extends TestCase
 {
@@ -20,7 +21,7 @@ class DeclensionTest extends TestCase
     /**
      * @dataProvider rulesProvider
      * @param array $rules
-     * @throws Exception
+     * @throws \Exception
      */
     public function testShowDeclinedWord(array $rules): void
     {
@@ -32,7 +33,7 @@ class DeclensionTest extends TestCase
     /**
      * @dataProvider rulesProvider
      * @param array $rules
-     * @throws Exception
+     * @throws \Exception
      */
     public function testGetMatchedRule(array $rules): void
     {
@@ -46,8 +47,8 @@ class DeclensionTest extends TestCase
 
     public function testGetMatchedRuleException(): void
     {
-        $this->rulesProvider->method('getRules')->willThrowException(new Exception());
-        $this->expectException(Exception::class);
+        $this->rulesProvider->method('getRules')->willThrowException(new \Exception());
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('An error occurred while trying to get rules. Check rule file');
         $this->declension->getMatchedRule('Сидоров', Declension::MASCULINE_GENDER, Declension::SURNAME);
     }
@@ -55,12 +56,12 @@ class DeclensionTest extends TestCase
     /**
      * @dataProvider rulesProvider
      * @param array $rules
-     * @throws Exception
+     * @throws \Exception
      */
     public function testGetMatchedRuleNotFoundRuleException(array $rules): void
     {
         $this->rulesProvider->method('getRules')->willReturn($rules);
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Can't match the word to a rule");
         $this->declension->getMatchedRule('Фамилия', Declension::MASCULINE_GENDER, Declension::SURNAME);
     }
@@ -68,7 +69,8 @@ class DeclensionTest extends TestCase
     public function rulesProvider(): array
     {
         $ruleNameIvan = $this->buildRule(
-            1, true, false, true, false, '', [''], '/([А-я]+())(н)$/u'
+            1, true, false, true, false, '', [''], '/([А-я]+())(н)$/u',
+            'н', 'а', 'у', 'а', 'ом', 'е'
         );
         $ruleNameSidorov = $this->buildRule(
             2, false, true, true, false, 'о', [''], '/([А-я]+(о))(в)$/u'
